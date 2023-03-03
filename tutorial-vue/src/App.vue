@@ -1,48 +1,70 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-import TablaPersonas from '@/components/TablaPersonas.vue'
+<template>
+  <div id="app" class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Personas</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <formulario-persona @add-persona="agregarPersona"/> <!-- <<<<<< -->
+        <tabla-personas :personas="personas" />
+      </div>
+    </div>
+  </div>
+</template>
+  
+<script>
+  import TablaPersonas from '@/components/TablaPersonas.vue'
+  import FormularioPersona from '@/components/FormularioPersona.vue'
+  export default {
+    name: 'app',
+    components: {
+      TablaPersonas,
+      FormularioPersona,
+    },
+    data() {
+      return {
+        personas: [
+          {
+            id: 1,
+            nombre: 'Jon',
+            apellido: 'Nieve',
+            email: 'jon@email.com',
+          },
+          {
+            id: 2,
+            nombre: 'Tyrion',
+            apellido: 'Lannister',
+            email: 'tyrion@email.com',
+          },
+          {
+            id: 3,
+            nombre: 'Daenerys',
+            apellido: 'Targaryen',
+            email: 'daenerys@email.com',
+          },
+        ],
+      }
+    },
+    methods: {
+        agregarPersona(persona) {
+          let id = 0;
+
+          if (this.personas.length > 0) {
+            id = this.personas[this.personas.length - 1].id + 1;
+          }
+
+          this.personas = [...this.personas, { ...persona, id}];
+        }
+    }
+  }
 </script>
 
-<template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
-</template>
-
-<style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+<style>
+  button {
+    background: #009435;
+    border: 1px solid #009435;
   }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
 </style>
