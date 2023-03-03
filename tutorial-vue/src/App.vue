@@ -1,6 +1,7 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
+import TablaPersonas from '@/components/TablaPersonas.vue'
 </script>
 
 <template>
