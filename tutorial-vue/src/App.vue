@@ -8,7 +8,7 @@
     <div class="row">
       <div class="col-md-12">
         <formulario-persona @add-persona="agregarPersona"/> <!-- <<<<<< -->
-        <tabla-personas :personas="personas" />
+        <tabla-personas :personas="personas" @delete-persona="eliminarPersona"/>
       </div>
     </div>
   </div>
@@ -56,6 +56,11 @@
           }
 
           this.personas = [...this.personas, { ...persona, id}];
+        },
+        eliminarPersona(id){
+          this.personas = this.personas.filter(
+            persona=> persona.id !== id
+          );
         }
     }
   }

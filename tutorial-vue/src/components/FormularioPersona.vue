@@ -12,6 +12,7 @@
                                 class="form-control"
                                 :class="{ 'is-invalid': procesando && nombreInvalido }"
                                 @focus="resetEstado"
+                                @keypress="resetEstado"
                             />
                         </div>
                     </div>
@@ -89,6 +90,7 @@
                     return;
                 }
                 this.$emit('add-persona', this.persona);
+                this.$refs.nombre.focus();
                 this.error = false;
                 this.correcto = true;
                 this.procesando = false;
