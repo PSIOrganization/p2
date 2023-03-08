@@ -7,6 +7,7 @@
                         <div class="form-group">
                             <label>Nombre</label>
                             <input 
+                                ref="nombre"
                                 v-model="persona.nombre" 
                                 type="text" 
                                 class="form-control"
@@ -89,6 +90,7 @@
                     this.error = true;
                     return;
                 }
+                // console.log("Funcional")
                 this.$emit('add-persona', this.persona);
                 this.$refs.nombre.focus();
                 this.error = false;
