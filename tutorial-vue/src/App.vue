@@ -17,6 +17,7 @@
 <script>
   import TablaPersonas from '@/components/TablaPersonas.vue'
   import FormularioPersona from '@/components/FormularioPersona.vue'
+  const myVar = import.meta.env.VITE_DJANGOURL;
   export default {
     name: 'app',
     components: {
@@ -31,7 +32,8 @@
     methods: {
       async listadoPersonas(){
         try {
-          const response = await fetch('http://127.0.0.1:8000/api/v1/personas');
+          // console.log(myVar)
+          const response = await fetch(myVar);
           this.personas = await response.json();
         } catch (error) {
           console.error(error);
@@ -39,7 +41,7 @@
       },
       async agregarPersona(persona) {
         try {
-          const response = await fetch('http://127.0.0.1:8000/api/v1/personas', {
+          const response = await fetch(myVar, {
             method: 'POST',
             body: JSON.stringify(persona),
             headers: { 'Content-type': 'application/json; charset=UTF-8' },
@@ -52,7 +54,7 @@
       },
       async eliminarPersona(persona_id){
         try {
-          await fetch('http://127.0.0.1:8000/api/v1/personas'+persona_id+'/', {
+          await fetch(myVar+persona_id+'/', {
             method: "DELETE"
           });
           this.personas= this.personas.filter(u => u.id !== persona_id);
@@ -62,7 +64,7 @@
       },
       async actualizarPersona(id, personaActualizada){
         try {
-          const response = await fetch('http://127.0.0.1:8000/api/v1/personas'+personaActualizada.id+'/', {
+          const response = await fetch(myVar+personaActualizada.id+'/', {
             method: 'PUT',
             body: JSON.stringify(personaActualizada),
             headers: { 'Content-type': 'application/json; charset=UTF-8' },
